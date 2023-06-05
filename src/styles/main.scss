@@ -1,0 +1,55 @@
+@use "./master" as *;
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: inherit;
+  height: inherit;
+}
+
+.files__container {
+  position: absolute;
+  z-index: 100;
+}
+
+.theme {
+  &__light {
+    .primary {
+      &-bg {
+        background-color: $light;
+        color: $dark;
+      }
+      &-border {
+        border-color: $dark;
+      }
+    }
+  }
+}
+
+.no-select {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}

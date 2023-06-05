@@ -1,0 +1,34 @@
+@use "./master" as *;
+
+.navbar {
+  width: 100%;
+  height: $navbar-height;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  &__start {
+    width: 50px;
+  }
+
+  &__minimize {
+    margin-right: 0;
+    margin-left: auto;
+    border-left: 1px solid;
+    width: 6px;
+  }
+
+  &__file {
+    align-items: center;
+    display: flex;
+    column-gap: 5px;
+    padding: 5px;
+
+    box-shadow: 0px 24px 3px -24px magenta;
+
+    img {
+      height: $navbar-height - 10px;
+    }
+  }
+}

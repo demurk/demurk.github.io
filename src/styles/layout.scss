@@ -1,0 +1,28 @@
+.files__layout {
+  width: 100%;
+
+  .file__preview {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .file__preview-icon {
+    max-width: 50px;
+    max-height: 40px;
+    margin-bottom: 5px;
+  }
+  .file__preview-name {
+  }
+}
+
+.files__layout .focused {
+  background-color: red;
+}

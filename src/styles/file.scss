@@ -1,0 +1,44 @@
+@use "styles/master" as *;
+
+.file {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 400px;
+  height: 600px;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+
+  .maximized {
+    width: 100vw;
+    height: calc(100vh - $navbar-height);
+  }
+
+  &__header {
+    height: $file-header-height;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__buttons {
+    align-items: center;
+    display: flex;
+  }
+
+  &__button {
+    height: $file-header-height;
+    width: 25px;
+  }
+
+  &__content {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__close:hover {
+    background-color: red;
+  }
+}

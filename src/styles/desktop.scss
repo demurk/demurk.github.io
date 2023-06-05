@@ -1,0 +1,8 @@
+@use "./master" as *;
+
+.desktop {
+  height: calc(100% - $navbar-height - 20px);
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
