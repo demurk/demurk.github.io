@@ -1,5 +1,7 @@
 .files__layout {
   width: 100%;
+  height: 100%;
+  grid-auto-rows: min-content;
 
   .file__preview {
     display: flex;

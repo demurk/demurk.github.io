@@ -17,8 +17,10 @@ const DraggableComponent = ({
 }: DraggableComponentType) => {
   const handleDrag = useCallback(
     ({ x, y }: { x: number; y: number }) => ({
-      x: Math.max(0, x),
-      y: Math.max(0, y),
+      // x: Math.max(0, x),
+      // y: Math.max(0, y),
+      x,
+      y,
     }),
     []
   );
@@ -31,6 +33,7 @@ const DraggableComponent = ({
 
   useEffect(
     () => () => {
+      console.log("unmount");
       onUnmount({ ...position.current });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

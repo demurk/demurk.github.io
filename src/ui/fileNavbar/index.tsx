@@ -1,4 +1,4 @@
-import { maximizeOrMinimzeFile } from "redux/reducers/files/FileSlice";
+import { maximizeOrMinimzeFile } from "redux/reducers/files/fileSlice";
 import { useAppDispatch } from "redux/hooks";
 import { FileData } from "types/global";
 

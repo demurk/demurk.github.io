@@ -6,7 +6,7 @@ import {
   closeFile,
   minimizeFile,
   saveFilePosition,
-} from "redux/reducers/files/FileSlice";
+} from "redux/reducers/files/fileSlice";
 
 import DraggableComponent from "helpers/draggable";
 
@@ -16,6 +16,9 @@ interface FileWindowType extends ChildrenType {
   FD: FileData;
   lastPosition: CoordinatesType;
 }
+
+const initX = 100;
+const initY = 40;
 
 const FileWindow = ({ children, FD, lastPosition }: FileWindowType) => {
   const draggableAreaRef = useRef<HTMLInputElement>(null);
@@ -27,7 +30,7 @@ const FileWindow = ({ children, FD, lastPosition }: FileWindowType) => {
       onUnmount={({ x, y }: CoordinatesType) =>
         dispatch(saveFilePosition({ fileId: FD.id, x, y }))
       }
-      initialPos={lastPosition}
+      initialPos={{ x: lastPosition.x || initX, y: lastPosition.y || initY }}
     >
       <div className="file primary-border">
         <div className="file__header primary-bg" ref={draggableAreaRef}>

@@ -4,8 +4,12 @@ export interface FileData {
   icon: string;
 }
 
+export interface FileDataWithPosition extends FileData {
+  initialPositionIndex?: number;
+}
+
 export interface LocalFileData {
-  fileComponent: () => JSX.Element,
+  fileComponent: JSX.Element,
   fileData: FileData,
 }
 
@@ -17,3 +21,5 @@ export interface CoordinatesType {
   x: number;
   y: number;
 }
+
+export type DivMouseType = React.MouseEvent<HTMLDivElement, MouseEvent>

@@ -1,13 +1,9 @@
 import { useAppSelector } from "redux/hooks";
-import { getMaximizedFiles } from "redux/reducers/files/FileSlice";
+import { getMaximizedFiles } from "redux/reducers/files/fileSlice";
 import FileWindow from "components/fileWindow";
 
 //Files
-import FileAboutData from "components/filesData/aboutMe";
-
-const FilesRenderMap = {
-  ...FileAboutData,
-};
+import FilesData from "components/filesData";
 
 const FileContainer = () => {
   const maximizedFiles = useAppSelector(getMaximizedFiles);
@@ -15,10 +11,10 @@ const FileContainer = () => {
   return (
     <div className="files__container">
       {maximizedFiles.map(({ data, lastPosition }) => {
-        const { fileData, fileComponent } = FilesRenderMap[data.id];
+        const { fileData, fileComponent } = FilesData[data.id];
         return (
           <FileWindow key={data.id} FD={fileData} lastPosition={lastPosition}>
-            {fileComponent()}
+            {fileComponent}
           </FileWindow>
         );
       })}

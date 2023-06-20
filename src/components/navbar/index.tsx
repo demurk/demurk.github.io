@@ -2,11 +2,12 @@ import {
   getOpenedFiles,
   unactiveAllFiles,
   minimizeAllFiles,
-} from "redux/reducers/files/FileSlice";
+} from "redux/reducers/files/fileSlice";
 import { useAppSelector, useAppDispatch } from "redux/hooks";
 
 import FileNavbar from "ui/fileNavbar";
 import ClockDateWidget from "ui/clockDateWidget";
+import LanguageSelect from "ui/languageSelect";
 
 import "styles/navbar.scss";
 
@@ -30,11 +31,16 @@ const Navbar = () => {
       {Object.values(openedFiles).map(({ data }) => {
         return <FileNavbar key={data.id} {...data} />;
       })}
-      <ClockDateWidget />
-      <button
-        className="navbar__minimize primary-border"
-        onClick={() => dispatch(minimizeAllFiles())}
-      ></button>
+      <div className="navbar__widgets">
+        <LanguageSelect />
+        <div className="navbar__clock">
+          <ClockDateWidget />
+        </div>
+        <button
+          className="navbar__minimize primary-border"
+          onClick={() => dispatch(minimizeAllFiles())}
+        ></button>
+      </div>
     </div>
   );
 };

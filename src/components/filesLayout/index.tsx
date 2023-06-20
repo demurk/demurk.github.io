@@ -1,58 +1,93 @@
 import { useState, useEffect } from "react";
-import { FileData } from "types/global";
+import { FileDataWithPosition, DivMouseType } from "types/global";
 
 import FilePreview from "ui/filePreview";
+import GridLayout from "./layouts/grid/layout";
 
-import "styles/layout.scss";
+import "styles/filesLayout.scss";
 
 interface FilePreviewDataType {
   isFocused: boolean;
 }
 
-const FilesLayout = ({ filesArray }: { filesArray: Array<FileData> }) => {
+const FilesLayout = ({
+  filesArray,
+}: {
+  filesArray: Array<FileDataWithPosition>;
+}) => {
   const [filesPreviewData, setFilesPreviewData] = useState<{
     [key: number]: FilePreviewDataType;
   }>({});
 
-  const updateFilesPreviewData = (id: any, key: string, value: any) => {
+  useEffect(() => {
+    updateAllFilesPreviewData("isFocused", false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const updateFilesPreviewData = (id: number, key: string, value: any) => {
     setFilesPreviewData((prev) => ({
       ...prev,
       [id]: { ...prev[id], [key]: value },
     }));
   };
 
-  const onFileClick = (id: number) => {
-    if (!filesPreviewData[id].isFocused) {
+  const updateAllFilesPreviewData = (key: string, value: any) => {
+    filesArray.forEach(({ id }) => {
+      setFilesPreviewData((prev) => ({
+        ...prev,
+        [id]: { ...prev[id], [key]: value },
+      }));
+    });
+  };
+
+  const onFileClick = (e: DivMouseType, id: number) => {
+    updateAllFilesPreviewData("isFocused", false);
+    if (e.detail === 2) {
+      updateFilesPreviewData(id, "isFocused", false);
+    } else if (!filesPreviewData[id].isFocused) {
       updateFilesPreviewData(id, "isFocused", true);
     }
   };
 
-  const onAreaClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onAreaClick = (e: DivMouseType) => {
     e.stopPropagation();
-    Object.keys(filesPreviewData).forEach((id) => {
-      updateFilesPreviewData(id, "isFocused", false);
-    });
+    updateAllFilesPreviewData("isFocused", false);
   };
 
-  useEffect(() => {
-    filesArray.forEach(({ id }) => {
-      updateFilesPreviewData(id, "isFocused", false);
-    });
-  }, []);
+  const createOrderedFiles = () => {
+    let defaultPosition = 0;
+
+    const filePreviewsArray: { position: number; component: JSX.Element }[] =
+      filesArray.map((FD) => {
+        const fileReviewData = filesPreviewData[FD.id];
+
+        let position = FD.initialPositionIndex;
+        if (!position) {
+          position = defaultPosition;
+          defaultPosition += 1;
+        }
+
+        return {
+          position,
+          component: (
+            <FilePreview
+              key={FD.id}
+              FD={FD}
+              isFocused={fileReviewData?.isFocused}
+              onClickCallback={(e: DivMouseType, id: number) =>
+                onFileClick(e, id)
+              }
+            />
+          ),
+        };
+      });
+
+    return filePreviewsArray;
+  };
 
   return (
     <div className="files__layout" onClick={(e) => onAreaClick(e)}>
-      {filesArray.map((FD) => {
-        const fileReviewData = filesPreviewData[FD.id];
-        return (
-          <FilePreview
-            key={FD.id}
-            FD={FD}
-            isFocused={fileReviewData?.isFocused}
-            onClickCallback={(id: number) => onFileClick(id)}
-          />
-        );
-      })}
+      <GridLayout filePreviews={createOrderedFiles()} />
     </div>
   );
 };

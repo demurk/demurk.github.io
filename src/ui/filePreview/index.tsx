@@ -1,14 +1,14 @@
 import { useRef } from "react";
 
 import { useAppDispatch } from "redux/hooks";
-import { openFile } from "redux/reducers/files/FileSlice";
-import { FileData } from "types/global";
+import { openFile } from "redux/reducers/files/fileSlice";
+import { FileDataWithPosition, DivMouseType } from "types/global";
 import DraggableComponent from "helpers/draggable";
 
 type FilePreviewType = {
-  FD: FileData;
+  FD: FileDataWithPosition;
   isFocused: Boolean;
-  onClickCallback: (id: number) => {} | void;
+  onClickCallback: (e: DivMouseType, id: number) => {} | void;
 };
 
 const FilePreview = ({
@@ -20,28 +20,27 @@ const FilePreview = ({
 
   const dragAreaRef = useRef<HTMLImageElement>(null);
 
-  const onPreviewClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onPreviewClick = (e: DivMouseType) => {
     e.stopPropagation();
-    onClickCallback(FD.id);
+    onClickCallback(e, FD.id);
     if (e.detail === 2) dispatch(openFile(FD));
   };
-
   return (
-    <DraggableComponent draggableArea={dragAreaRef}>
-      <div
-        onClick={(e) => onPreviewClick(e)}
-        className={`file__preview no-select ${isFocused ? "focused" : ""}`}
-      >
-        <img
-          src={`img/${FD.icon}`}
-          alt=""
-          draggable={false}
-          ref={dragAreaRef}
-          className="file__preview-icon no-select"
-        />
-        <div className="file__preview-name no-select">{FD.name}</div>
-      </div>
-    </DraggableComponent>
+    // <DraggableComponent draggableArea={dragAreaRef}>
+    <div
+      onClick={(e) => onPreviewClick(e)}
+      className={`file__preview no-select ${isFocused ? "focused" : ""}`}
+    >
+      <img
+        src={`img/${FD.icon}`}
+        alt=""
+        draggable={false}
+        ref={dragAreaRef}
+        className="file__preview-icon no-select"
+      />
+      <div className="file__preview-name no-select">{FD.name}</div>
+    </div>
+    // </DraggableComponent>
   );
 };
 

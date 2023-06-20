@@ -15,7 +15,7 @@ const FileComponent = () => {
 };
 
 const FileAboutData: { [x: number]: LocalFileData } = {
-  [FDAboutMe.id]: { fileComponent: FileComponent, fileData: FDAboutMe },
+  [FDAboutMe.id]: { fileComponent: <FileComponent />, fileData: FDAboutMe },
 };
 
 export default FileAboutData;
