@@ -8,13 +8,17 @@ export interface FileDataWithPosition extends FileData {
   initialPositionIndex?: number;
 }
 
+export interface FileDataWithActive extends FileData {
+  isActive: boolean;
+}
+
 export interface LocalFileData {
   fileComponent: JSX.Element,
   fileData: FileData,
 }
 
 export interface ChildrenType {
-  children: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode | React.ReactNode[];
 }
 
 export interface CoordinatesType {

@@ -1,6 +1,11 @@
 $navbar-height: 40px;
-$file-header-height: 25px;
+$file-header-height: 30px;
 
 // COLORS
 $dark: #131313;
 $light: #dfdfdf;
+
+$filter-light: invert(91%) sepia(99%) saturate(33%) hue-rotate(192deg)
+  brightness(108%) contrast(99%);
+$filter-dark: invert(0%) sepia(90%) saturate(7500%) hue-rotate(167deg)
+  brightness(105%) contrast(109%);

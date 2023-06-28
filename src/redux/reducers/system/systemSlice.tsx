@@ -6,8 +6,9 @@ import { LangType, ThemeType, LANG_EN, LANG_RU } from "helpers/constants";
 
 interface ConfigState {
   lang: LangType;
-  systemTheme: ThemeType;
-  systemColor: string;
+  theme: ThemeType;
+  accent: string;
+  background: string;
 }
 
 const getUserLanguage = () => {
@@ -20,41 +21,50 @@ const getUserLanguage = () => {
 const initialConfigState = (): ConfigState => {
   return {
     lang: getUserLanguage(),
-    systemTheme: "dark",
-    systemColor: "#0900C7",
+    theme: "dark",
+    accent: "#0900C7",
+    background: "#0900C7",
   };
 };
 
 const initialState: ConfigState = initialConfigState();
 
-export const configSlice = createSlice({
-  name: "config",
+export const systemSlice = createSlice({
+  name: "system",
   initialState,
   reducers: {
     changeLanguage: (state, action: PayloadAction<LangType>) => {
       state.lang = action.payload;
     },
     changeTheme: (state, action: PayloadAction<ThemeType>) => {
-      state.systemTheme = action.payload;
+      state.theme = action.payload;
     },
-    changeColor: (state, action: PayloadAction<string>) => {
-      state.systemColor = action.payload;
+    changeAccent: (state, action: PayloadAction<string>) => {
+      state.accent = action.payload;
+    },
+    changeBackground: (state, action: PayloadAction<string>) => {
+      state.background = action.payload;
     },
   },
 });
 
-export const { changeLanguage, changeTheme, changeColor } = configSlice.actions;
+export const { changeLanguage, changeTheme, changeAccent, changeBackground } =
+  systemSlice.actions;
 
-export const getLanguage = (state: RootState): LangType => {
-  return state.config.lang;
+export const getSystemLanguage = (state: RootState): LangType => {
+  return state.system.lang;
 };
 
 export const getSystemTheme = (state: RootState): ThemeType => {
-  return state.config.systemTheme;
+  return state.system.theme;
 };
 
-export const getSystemColor = (state: RootState): string => {
-  return state.config.systemColor;
+export const getSystemAccent = (state: RootState): string => {
+  return state.system.accent;
 };
 
-export default configSlice.reducer;
+export const getSystemBackground = (state: RootState): string => {
+  return state.system.background;
+};
+
+export default systemSlice.reducer;

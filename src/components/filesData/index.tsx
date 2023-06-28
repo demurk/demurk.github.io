@@ -1,9 +1,9 @@
 import FileAboutData from "./aboutMe";
-import FileColorPickerData from "./settings";
+import FileSettingsData from "./settings";
 
 const FilesData = {
   ...FileAboutData,
-  ...FileColorPickerData,
+  ...FileSettingsData,
 };
 
 export default FilesData;

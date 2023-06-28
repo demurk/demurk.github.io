@@ -1,5 +1,8 @@
-import FileSlice from "./files/fileSlice";
-import configSlice from "./config/configSlice";
+import fileSlice from "./files/fileSlice";
+import systemSlice from "./system/systemSlice";
 
-const rootReducer = { openedFiles: FileSlice, config: configSlice };
+const rootReducer = {
+  openedFiles: fileSlice,
+  system: systemSlice,
+};
 export default rootReducer;

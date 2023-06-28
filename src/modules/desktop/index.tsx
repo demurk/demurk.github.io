@@ -1,23 +1,34 @@
+import { useAppSelector } from "redux/hooks";
+import { getSystemBackground } from "redux/reducers/system/systemSlice";
+
 import FilesLayout from "components/filesLayout";
-import DesktopGrid from "../../components/filesLayout/layouts/filesGrid";
 
 // Files data
 import { FDAboutMe } from "components/filesData/aboutMe";
-import { FDColorPicker } from "components/filesData/settings";
+import { FDSettings } from "components/filesData/settings";
 
 import "styles/desktop.scss";
 
 const desktopFiles = [
   { ...FDAboutMe },
-  { ...FDColorPicker, initialPositionIndex: -1 },
+  { ...FDSettings, initialPositionIndex: -1 },
 ];
 
 const Desktop = () => {
+  const currentBackgroundImage = useAppSelector(getSystemBackground);
+
   return (
-    <div className="desktop">
-      <FilesLayout filesArray={desktopFiles} />
-      {/* <DesktopGrid filesArray={desktopFiles} /> */}
-    </div>
+    <>
+      {/* <img src={currentBackgroundImage} className="desktop__wallpaper" alt="" /> */}
+      <div
+        className="desktop"
+        style={{
+          backgroundImage: `url(${currentBackgroundImage})`,
+        }}
+      >
+        <FilesLayout filesArray={desktopFiles} />
+      </div>
+    </>
   );
 };
 

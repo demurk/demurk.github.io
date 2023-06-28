@@ -1,0 +1,75 @@
+@use "styles/master" as *;
+
+$padding: 10px;
+$bar-height: 10px;
+
+.file__settings {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+
+  height: calc(100% - $padding * 2);
+  width: calc(100% - $padding * 2);
+
+  padding: $padding;
+  padding-top: 3px;
+
+  .picker {
+    &__menu {
+      display: flex;
+      column-gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    &__preview {
+      width: 50px;
+    }
+
+    .react-colorful {
+      width: 100%;
+      row-gap: 10px;
+      max-height: 400px;
+      height: 30vh;
+
+      &__saturation {
+        border-radius: 0;
+        border-bottom: 5px solid #000;
+
+        &-pointer {
+          border-radius: 50% !important;
+          width: 15px !important;
+          height: 15px;
+        }
+      }
+
+      &__hue {
+        height: $bar-height;
+        border-radius: 0;
+
+        &-pointer {
+          height: 25px;
+        }
+      }
+
+      &__pointer {
+        border-radius: 0;
+        width: 10px;
+      }
+    }
+  }
+
+  .bg-settings {
+    .gallery__box {
+      width: 100px;
+      height: 100px;
+    }
+    #bgFile {
+      display: none;
+    }
+    .bg-upload {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

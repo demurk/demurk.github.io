@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { changeLanguage, getLanguage } from "redux/reducers/config/configSlice";
+import {
+  changeLanguage,
+  getSystemLanguage,
+} from "redux/reducers/system/systemSlice";
 
 import Select from "react-select";
 
@@ -15,8 +18,16 @@ const options: OptionType[] = [
   { value: LANG_EN, label: "ENG" },
 ];
 
-const LanguageSelect = () => {
-  const language = useAppSelector(getLanguage);
+type LanguageSelectType = {
+  menuPlacement?: "top" | "bottom";
+  hideButtons?: Boolean;
+};
+
+const LanguageSelect = ({
+  menuPlacement = "top",
+  hideButtons = true,
+}: LanguageSelectType) => {
+  const language = useAppSelector(getSystemLanguage);
   const selectedOption = options.find((x) => x.value === language);
 
   const dispatch = useAppDispatch();
@@ -29,7 +40,13 @@ const LanguageSelect = () => {
 
   return (
     <Select
-      menuPlacement="top"
+      components={
+        hideButtons && {
+          DropdownIndicator: () => null,
+          IndicatorSeparator: () => null,
+        }
+      }
+      menuPlacement={menuPlacement}
       value={selectedOption}
       options={options}
       onChange={(option) => handleChange(option)}

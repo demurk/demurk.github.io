@@ -5,26 +5,34 @@ import { FileData, CoordinatesType } from "types/global";
 
 interface FileState {
   isMinimized: boolean;
-  isActive: boolean;
+  isMaximized: boolean;
   lastPosition: CoordinatesType;
 
   data: FileData;
 }
 
+interface FileStateWithActive extends FileState {
+  isActive: boolean;
+}
+
 const initialFileState = (FD: FileData): FileState => {
   return {
     isMinimized: false,
-    isActive: true,
+    isMaximized: false,
     lastPosition: { x: 0, y: 0 },
     data: FD,
   };
 };
 
-export interface FilesArrayState {
-  [fileId: number]: FileState;
+export interface FileSliceState {
+  data: { [fileId: number]: FileState };
+  activeFileId: number | null;
 }
 
-const initialState: FilesArrayState = {};
+const initialState: FileSliceState = {
+  data: {},
+  activeFileId: null,
+};
 
 export const fileSlice = createSlice({
   name: "openedFiles",
@@ -33,50 +41,58 @@ export const fileSlice = createSlice({
     openFile: (state, action: PayloadAction<FileData>) => {
       const fileId = action.payload.id;
       if (fileId in state) {
-        fileSlice.caseReducers.maximizeFile(state, {
+        fileSlice.caseReducers.displayFile(state, {
           ...action,
           payload: action.payload.id,
         });
       } else {
-        state[fileId] = { ...initialFileState(action.payload) };
+        state.data[fileId] = { ...initialFileState(action.payload) };
+        state.activeFileId = fileId;
       }
     },
     closeFile: (state, action: PayloadAction<number>) => {
-      delete state[action.payload];
+      delete state.data[action.payload];
     },
-    maximizeOrMinimzeFile: (state, action: PayloadAction<number>) => {
+    displayOrMinimzeFile: (state, action: PayloadAction<number>) => {
       const fileId = action.payload;
-      if (state[fileId].isMinimized) {
-        fileSlice.caseReducers.maximizeFile(state, action);
+      if (state.data[fileId].isMinimized || state.activeFileId !== fileId) {
+        fileSlice.caseReducers.displayFile(state, action);
+        // fileSlice.caseReducers.setActiveFile(state, action);
       } else {
         fileSlice.caseReducers.minimizeFile(state, action);
       }
     },
-    maximizeFile: (state, action: PayloadAction<number>) => {
-      state[action.payload].isMinimized = false;
-      state[action.payload].isActive = true;
+    displayFile: (state, action: PayloadAction<number>) => {
+      state.data[action.payload].isMinimized = false;
+      state.activeFileId = action.payload;
     },
     minimizeFile: (state, action: PayloadAction<number>) => {
-      state[action.payload].isMinimized = true;
-      state[action.payload].isActive = false;
+      state.data[action.payload].isMinimized = true;
+      state.activeFileId = null;
     },
     minimizeAllFiles: (state) => {
-      Object.values(state).forEach((file) => {
+      Object.values(state.data).forEach((file) => {
         file.isMinimized = true;
-        file.isActive = false;
       });
+      state.activeFileId = null;
+    },
+    setActiveFile: (state, action: PayloadAction<number>) => {
+      state.activeFileId = action.payload;
+    },
+    maximizeFile: (state, action: PayloadAction<number>) => {
+      state.data[action.payload].isMaximized =
+        !state.data[action.payload].isMaximized;
+      state.activeFileId = action.payload;
     },
     unactiveAllFiles: (state) => {
-      Object.values(state).forEach((file) => {
-        file.isActive = false;
-      });
+      state.activeFileId = null;
     },
     saveFilePosition: (
       state,
       action: PayloadAction<{ fileId: number; x: number; y: number }>
     ) => {
       const { fileId, x, y } = action.payload;
-      const currentFile = state[fileId];
+      const currentFile = state.data[fileId];
 
       if (currentFile && x && y) {
         currentFile.lastPosition = { x, y };
@@ -88,30 +104,43 @@ export const fileSlice = createSlice({
 export const {
   openFile,
   closeFile,
-  maximizeFile,
+  displayFile,
   minimizeFile,
-  maximizeOrMinimzeFile,
+  displayOrMinimzeFile,
   minimizeAllFiles,
   unactiveAllFiles,
   saveFilePosition,
+  setActiveFile,
+  maximizeFile,
 } = fileSlice.actions;
 
 export const getFileState = (state: RootState, fileId: number): FileState => {
-  return state.openedFiles[fileId];
+  return state.openedFiles.data[fileId];
 };
 
 export const getFileData = (state: RootState, fileId: number): FileData => {
-  return state.openedFiles[fileId].data;
+  return state.openedFiles.data[fileId].data;
 };
 
-export const getOpenedFiles = (state: RootState): FilesArrayState => {
-  return state.openedFiles;
+export const getOpenedFiles = (state: RootState): FileSliceState["data"] => {
+  return state.openedFiles.data;
 };
 
-export const getMaximizedFiles = (state: RootState): Array<FileState> => {
-  return Object.values(state.openedFiles).filter(
+export const getActiveFileId = (state: RootState): number | null => {
+  return state.openedFiles.activeFileId;
+};
+
+export const getVisibleFiles = (
+  state: RootState
+): Array<FileStateWithActive> => {
+  const openedFilesData = Object.values(state.openedFiles.data).filter(
     (fileState) => fileState.isMinimized === false
   );
+
+  return openedFilesData.map((fileData) => ({
+    ...fileData,
+    isActive: fileData.data.id === state.openedFiles.activeFileId,
+  }));
 };
 
 export default fileSlice.reducer;

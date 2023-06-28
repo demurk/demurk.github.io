@@ -16,16 +16,14 @@ function App() {
   }
 
   return (
-    <div className="theme__light container">
-      <Layout>
-        <Router>
-          <Routes>
-            <Route path={defaultPath} element={<Desktop />} />
-            <Route path="*" element={<MissingRoute />} />
-          </Routes>
-        </Router>
-      </Layout>
-    </div>
+    <Layout>
+      <Router>
+        <Routes>
+          <Route path={defaultPath} element={<Desktop />} />
+          <Route path="*" element={<MissingRoute />} />
+        </Routes>
+      </Router>
+    </Layout>
   );
 }
 

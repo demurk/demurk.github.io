@@ -1,39 +1,69 @@
 import React, { useState } from "react";
 
 import { HexColorPicker } from "react-colorful";
+import { useDebouncyFn } from "use-debouncy";
 
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { getSystemColor } from "redux/reducers/config/configSlice";
-import { FileData, LocalFileData } from "types/global";
-
-export const FDColorPicker: FileData = {
-  id: 2,
-  icon: "txt_icon.png",
-  name: "Settings",
-};
+import {
+  getSystemAccent,
+  changeAccent,
+} from "redux/reducers/system/systemSlice";
+import BoxesGallery from "ui/boxesGallery";
 
 const presetColors = ["#cd9323", "#1a53d8", "#9a2151", "#0d6416", "#8d2808"];
 
 const ColorPicker = () => {
   const dispatch = useAppDispatch();
-  const currentSystemColor = "#123412"; //useAppSelector(getSystemColor);
+  const currentSystemColor = useAppSelector(getSystemAccent);
 
   const [tmpColor, setTmpColor] = useState<string>(currentSystemColor);
+  const [recentColors, setRecentColors] = useState<string[]>([
+    currentSystemColor,
+  ]);
+
+  const handleChange = useDebouncyFn((color: string) => {
+    dispatch(changeAccent(color));
+
+    if (!recentColors.includes(color)) {
+      const newRecentColors = [color, ...recentColors.slice(0, 4)];
+      setRecentColors(newRecentColors);
+    }
+  }, 200);
+
+  const colorSwatches = (title: string, colors: string[]) => {
+    return (
+      <BoxesGallery
+        title={title}
+        items={colors}
+        currentItem={currentSystemColor}
+        onBoxChange={(selectedBox) => {
+          if (typeof selectedBox === "string") {
+            setTmpColor(selectedBox);
+            dispatch(changeAccent(selectedBox));
+          }
+        }}
+      />
+    );
+  };
 
   return (
     <div className="picker">
-      <HexColorPicker color={tmpColor} onChange={setTmpColor} />
-
-      <div className="picker__swatches">
-        {presetColors.map((presetColor) => (
-          <button
-            key={presetColor}
-            className="picker__swatch"
-            style={{ background: presetColor }}
-            onClick={() => setTmpColor(presetColor)}
-          />
-        ))}
+      <div>Select a custom accent color</div>
+      <div className="picker__menu">
+        <HexColorPicker
+          color={currentSystemColor}
+          onChange={(color) => {
+            setTmpColor(color);
+            handleChange(color);
+          }}
+        />
+        <div
+          className="picker__preview"
+          style={{ backgroundColor: tmpColor }}
+        ></div>
       </div>
+      {colorSwatches("Recent colors", recentColors)}
+      {colorSwatches("Default colors", presetColors)}
     </div>
   );
 };

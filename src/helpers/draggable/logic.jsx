@@ -2,9 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 
 import throttle from "./throttle";
 
-const id = (x) => x;
-
-const useDraggable = ({ onDrag = id, draggableArea, initialPos } = {}) => {
+const useDraggable = ({ onDrag, draggableArea, initialPos } = {}) => {
   const [pressed, setPressed] = useState(false);
   const position = useRef({ x: initialPos?.x || 0, y: initialPos?.y || 0 });
   const ref = useRef();
@@ -32,10 +30,23 @@ const useDraggable = ({ onDrag = id, draggableArea, initialPos } = {}) => {
     [draggableArea]
   );
 
+  const setFilePos = ({ x, y }) => {
+    ref.current.style.left = `${x}px`;
+    ref.current.style.top = `${y}px`;
+  };
+
   useEffect(() => {
-    const { x, y } = position.current;
-    ref.current.style.transform = `translate(${x}px, ${y}px)`;
+    setFilePos(position.current);
   }, []);
+
+  useEffect(() => {
+    if (
+      (initialPos.x === 0 && initialPos.y === 0) ||
+      (ref.current.style.left === "0px" && ref.current.style.top === "0px")
+    ) {
+      setFilePos(initialPos);
+    }
+  }, [initialPos]);
 
   useEffect(() => {
     if (!pressed) {
@@ -47,12 +58,12 @@ const useDraggable = ({ onDrag = id, draggableArea, initialPos } = {}) => {
         return;
       }
       const pos = position.current;
-      const elem = ref.current;
       position.current = onDrag({
         x: pos.x + event.movementX,
         y: pos.y + event.movementY,
       });
-      elem.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+
+      setFilePos(pos);
     });
     const handleMouseUp = (e) => {
       e.target.style.userSelect = "auto";
@@ -68,7 +79,7 @@ const useDraggable = ({ onDrag = id, draggableArea, initialPos } = {}) => {
     };
   }, [pressed, onDrag]);
 
-  return { draggableElement: legacyRef, position };
+  return { draggableRef: legacyRef, position };
 };
 
 export default useDraggable;

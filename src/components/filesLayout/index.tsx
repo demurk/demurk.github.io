@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FileDataWithPosition, DivMouseType } from "types/global";
 
 import FilePreview from "ui/filePreview";
-import GridLayout from "./layouts/grid/layout";
+import GridLayout from "./layouts/grid";
 
 import "styles/filesLayout.scss";
 
@@ -50,7 +50,7 @@ const FilesLayout = ({
   };
 
   const onAreaClick = (e: DivMouseType) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     updateAllFilesPreviewData("isFocused", false);
   };
 

@@ -10,10 +10,13 @@
   display: flex;
   flex-direction: column;
   z-index: 100;
+  overflow: hidden;
+  resize: both;
 
-  .maximized {
-    width: 100vw;
-    height: calc(100vh - $navbar-height);
+  &.maximized {
+    resize: none;
+    width: 100vw !important;
+    height: calc(100vh - $navbar-height) !important;
   }
 
   &__header {
@@ -21,6 +24,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    margin-left: 5px;
   }
 
   &__buttons {
@@ -30,12 +35,13 @@
 
   &__button {
     height: $file-header-height;
-    width: 25px;
+    width: 40px;
   }
 
   &__content {
     height: 100%;
     width: 100%;
+    overflow: scroll;
   }
 
   &__close:hover {

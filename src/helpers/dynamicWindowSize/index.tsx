@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const DynamicWindowSize = () => {
-  const [windowSize, setWindowSize] = useState<number[]>([
-    window.innerWidth,
-    window.innerHeight,
-  ]);
+  const windowSize = useRef<number[]>([window.innerWidth, window.innerHeight]);
+
+  // const [windowSize, setWindowSize] = useState<number[]>([
+  //   window.innerWidth,
+  //   window.innerHeight,
+  // ]);
 
   useEffect(() => {
     const handleWindowResize = () => {
-      setWindowSize([window.innerWidth, window.innerHeight]);
+      windowSize.current = [window.innerWidth, window.innerHeight];
     };
 
     window.addEventListener("resize", handleWindowResize);
@@ -18,7 +20,7 @@ const DynamicWindowSize = () => {
     };
   }, []);
 
-  return windowSize;
+  return windowSize.current;
 };
 
 export default DynamicWindowSize;

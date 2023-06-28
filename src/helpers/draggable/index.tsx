@@ -1,5 +1,6 @@
 import { useCallback, useEffect, RefObject } from "react";
 import { CoordinatesType, ChildrenType } from "types/global";
+import DynamicWindowSize from "helpers/dynamicWindowSize";
 
 import useDraggable from "./logic";
 
@@ -7,6 +8,7 @@ interface DraggableComponentType extends ChildrenType {
   draggableArea: RefObject<any>;
   initialPos?: CoordinatesType;
   onUnmount?: (position: CoordinatesType) => {} | void;
+  style?: {};
 }
 
 const DraggableComponent = ({
@@ -14,18 +16,19 @@ const DraggableComponent = ({
   onUnmount = () => {},
   initialPos,
   children,
+  style,
 }: DraggableComponentType) => {
+  const [windowWidth, windowHeight] = DynamicWindowSize();
+
   const handleDrag = useCallback(
     ({ x, y }: { x: number; y: number }) => ({
-      // x: Math.max(0, x),
-      // y: Math.max(0, y),
-      x,
-      y,
+      x: Math.min(Math.max(0, x), windowWidth - 10),
+      y: Math.min(Math.max(0, y), windowHeight - 10),
     }),
     []
   );
 
-  const { draggableElement, position } = useDraggable({
+  const { draggableRef, position } = useDraggable({
     onDrag: handleDrag,
     draggableArea,
     initialPos,
@@ -33,15 +36,14 @@ const DraggableComponent = ({
 
   useEffect(
     () => () => {
-      console.log("unmount");
-      onUnmount({ ...position.current });
+      onUnmount(position.current);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
   return (
-    <div ref={draggableElement} style={{ display: "flex" }}>
+    <div ref={draggableRef} style={{ display: "flex", ...style }}>
       {children}
     </div>
   );

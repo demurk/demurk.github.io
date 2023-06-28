@@ -4,12 +4,13 @@
   width: 100%;
   height: $navbar-height;
   display: flex;
+  column-gap: 1px;
   position: absolute;
   bottom: 0;
   left: 0;
 
   &__start {
-    width: 50px;
+    width: 51px;
   }
 
   &__minimize {
@@ -19,12 +20,32 @@
   }
 
   &__file {
-    align-items: center;
+    width: 160px;
+    max-width: 20%;
+    cursor: pointer;
     display: flex;
-    column-gap: 5px;
-    padding: 5px;
+    flex-direction: column;
+    justify-content: space-between;
 
-    box-shadow: 0px 24px 3px -24px magenta;
+    &-info {
+      align-items: center;
+      display: flex;
+      column-gap: 10px;
+      padding: 5px;
+      padding-bottom: 0;
+    }
+
+    &-shadow {
+      background-color: black;
+      height: 3px;
+      width: calc(100% - 10px);
+      align-self: center;
+    }
+
+    &:hover > &-shadow,
+    &-shadow.active {
+      width: 100%;
+    }
 
     img {
       height: $navbar-height - 10px;

@@ -105,7 +105,7 @@ const GridLayout = ({ filePreviews }: GridLayoutType) => {
   const emptyCell = (position: number) => {
     return (
       <div
-        draggable={true}
+        draggable={false}
         key={position}
         style={{ order: position }}
         onDrop={(e) => {

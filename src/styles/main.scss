@@ -30,6 +30,12 @@ body {
       &-border {
         border-color: $dark;
       }
+      &-svg {
+        filter: $filter-light;
+      }
+      &-svg__alt {
+        filter: $filter-dark;
+      }
     }
   }
 }

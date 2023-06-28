@@ -2,9 +2,12 @@
 
 .desktop {
   height: calc(100% - $navbar-height - 20px);
-  // width: 100%;
-  // display: flex;
   padding: 10px;
+  background: no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .desktop-grid {
