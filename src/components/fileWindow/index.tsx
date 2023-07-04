@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useRef, useEffect, Suspense } from "react";
 
 import {
   FileData,
@@ -14,6 +14,7 @@ import {
   minimizeFile,
   maximizeFile,
   saveFilePosition,
+  saveFileSize,
   setActiveFile,
 } from "redux/reducers/files/fileSlice";
 
@@ -27,6 +28,7 @@ interface FileWindowType extends ChildrenType {
   lastPosition: CoordinatesType;
   isActive: boolean;
   isMaximized: boolean;
+  lastSize: CoordinatesType;
 }
 
 const initX = 100;
@@ -38,8 +40,12 @@ const FileWindow = ({
   lastPosition,
   isActive,
   isMaximized,
+  lastSize,
 }: FileWindowType) => {
   const draggableAreaRef = useRef<HTMLInputElement>(null);
+  const fileWindowRef = useRef<HTMLDivElement>(null);
+  const resizeObserver = useRef<any>(null);
+  const fileWindowSize = useRef<CoordinatesType | null>(null);
   const dispatch = useAppDispatch();
 
   const systemAccent = useAppSelector(getSystemAccent);
@@ -52,21 +58,56 @@ const FileWindow = ({
     e.stopPropagation();
   };
 
+  useEffect(() => {
+    if (!fileWindowRef.current) return;
+    resizeObserver.current = new ResizeObserver(() => {
+      const rectTemp = fileWindowRef.current?.getClientRects()[0];
+      if (
+        !(
+          rectTemp?.bottom === rectTemp?.height &&
+          rectTemp?.right === rectTemp?.width &&
+          rectTemp?.left === rectTemp?.x &&
+          rectTemp?.top === rectTemp?.y
+        )
+      ) {
+        fileWindowSize.current = {
+          x: rectTemp?.width || 0,
+          y: rectTemp?.height || 0,
+        };
+      }
+    });
+    resizeObserver.current.observe(fileWindowRef.current);
+    return () => {
+      resizeObserver.current.disconnect();
+      if (fileWindowSize.current) {
+        dispatch(saveFileSize({ fileId: FD.id, ...fileWindowSize.current }));
+      }
+    };
+  }, []);
+
   return (
     <DraggableComponent
       draggableArea={draggableAreaRef}
       onUnmount={({ x, y }: CoordinatesType) =>
         dispatch(saveFilePosition({ fileId: FD.id, x, y }))
       }
-      initialPos={{ x: lastPosition.x || initX, y: lastPosition.y || initY }}
+      initialPos={{
+        x: lastPosition.x !== null ? lastPosition.x : initX,
+        y: lastPosition.y !== null ? lastPosition.y : initY,
+      }}
       setNullPosition={isMaximized}
       style={{ zIndex: fileZIndex, position: "absolute" }}
     >
       <div
-        className={`file${isMaximized ? " maximized" : ""}`}
+        ref={fileWindowRef}
+        className={`file${isMaximized ? " maximized" : ""}${
+          isActive ? " active" : " unactive-bg"
+        }`}
         style={{
           backgroundColor: systemAccent,
           borderColor: systemAccent,
+          width: lastSize.x - 2,
+          height: lastSize.y - 2,
         }}
         onClick={(e) => onFileClick(e)}
       >
@@ -105,7 +146,9 @@ const FileWindow = ({
             </button>
           </div>
         </div>
-        <div className="file__content primary-bg">{children}</div>
+        <Suspense>
+          <div className="file__content primary-bg">{children}</div>
+        </Suspense>
       </div>
     </DraggableComponent>
   );

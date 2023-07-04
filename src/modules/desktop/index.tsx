@@ -19,7 +19,6 @@ const Desktop = () => {
 
   return (
     <>
-      {/* <img src={currentBackgroundImage} className="desktop__wallpaper" alt="" /> */}
       <div
         className="desktop"
         style={{

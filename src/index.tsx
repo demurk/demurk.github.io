@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { useAppStore } from "redux/store";
 
+import "helpers/localization/index";
 import App from "./App";
 
 import "styles/main.scss";

@@ -37,6 +37,91 @@ body {
         filter: $filter-dark;
       }
     }
+    .unactive-bg {
+      background-color: $light-main !important;
+    }
+  }
+  &__dark {
+    .primary {
+      &-bg {
+        background-color: $dark;
+        color: $light;
+      }
+      &-border {
+        border-color: $light;
+      }
+      &-svg {
+        filter: $filter-dark;
+      }
+      &-svg__alt {
+        filter: $filter-light;
+      }
+    }
+    .unactive-bg {
+      background-color: $dark-active !important;
+    }
+  }
+}
+
+.select {
+  &__control {
+    border: unset !important;
+    box-shadow: unset !important;
+  }
+  &__menu {
+    margin: 0 !important;
+    border: unset !important;
+    z-index: 11 !important;
+    &-list {
+      padding: 0 !important;
+    }
+  }
+  &__option {
+    padding: 8px 0 !important;
+    text-align: center;
+  }
+}
+
+.theme {
+  &__light {
+    .select {
+      &__control {
+        background-color: $light;
+      }
+      &__menu {
+        background-color: inherit;
+      }
+      &__option {
+        color: $dark;
+        background-color: $light;
+        &:hover {
+          background-color: $light-hovered;
+        }
+      }
+      &__single-value {
+        color: $dark;
+      }
+    }
+  }
+  &__dark {
+    .select {
+      &__control {
+        background-color: inherit;
+      }
+      &__menu {
+        background-color: inherit;
+      }
+      &__option {
+        background-color: $dark;
+        color: $light;
+        &:hover {
+          background-color: $dark-hovered;
+        }
+      }
+      &__single-value {
+        color: $light;
+      }
+    }
   }
 }
 
@@ -58,4 +143,9 @@ input[type="reset"] {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+[draggable="true"] {
+  position: relative;
+  z-index: 1;
 }

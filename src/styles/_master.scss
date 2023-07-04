@@ -2,8 +2,17 @@ $navbar-height: 40px;
 $file-header-height: 30px;
 
 // COLORS
-$dark: #131313;
-$light: #dfdfdf;
+$dark: #101010;
+$dark-main: #202020;
+$dark-active: #333333;
+$dark-active-hovered: #474747;
+$dark-hovered: #272727;
+
+$light: #eeeeee;
+$light-main: #ffffff;
+$light-active: #f8f8f8;
+$light-active-hovered: #fcfcfc;
+$light-hovered: #f5f5f5;
 
 $filter-light: invert(91%) sepia(99%) saturate(33%) hue-rotate(192deg)
   brightness(108%) contrast(99%);

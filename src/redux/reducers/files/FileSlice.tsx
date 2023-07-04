@@ -7,6 +7,7 @@ interface FileState {
   isMinimized: boolean;
   isMaximized: boolean;
   lastPosition: CoordinatesType;
+  lastSize: CoordinatesType;
 
   data: FileData;
 }
@@ -19,7 +20,8 @@ const initialFileState = (FD: FileData): FileState => {
   return {
     isMinimized: false,
     isMaximized: false,
-    lastPosition: { x: 0, y: 0 },
+    lastPosition: { x: 100, y: 40 },
+    lastSize: { x: 400, y: 400 },
     data: FD,
   };
 };
@@ -40,7 +42,7 @@ export const fileSlice = createSlice({
   reducers: {
     openFile: (state, action: PayloadAction<FileData>) => {
       const fileId = action.payload.id;
-      if (fileId in state) {
+      if (fileId in state.data) {
         fileSlice.caseReducers.displayFile(state, {
           ...action,
           payload: action.payload.id,
@@ -57,7 +59,6 @@ export const fileSlice = createSlice({
       const fileId = action.payload;
       if (state.data[fileId].isMinimized || state.activeFileId !== fileId) {
         fileSlice.caseReducers.displayFile(state, action);
-        // fileSlice.caseReducers.setActiveFile(state, action);
       } else {
         fileSlice.caseReducers.minimizeFile(state, action);
       }
@@ -93,9 +94,19 @@ export const fileSlice = createSlice({
     ) => {
       const { fileId, x, y } = action.payload;
       const currentFile = state.data[fileId];
+      if (currentFile) {
+        currentFile.lastPosition = { x, y };
+      }
+    },
+    saveFileSize: (
+      state,
+      action: PayloadAction<{ fileId: number; x: number; y: number }>
+    ) => {
+      const { fileId, x, y } = action.payload;
+      const currentFile = state.data[fileId];
 
       if (currentFile && x && y) {
-        currentFile.lastPosition = { x, y };
+        currentFile.lastSize = { x, y };
       }
     },
   },
@@ -110,6 +121,7 @@ export const {
   minimizeAllFiles,
   unactiveAllFiles,
   saveFilePosition,
+  saveFileSize,
   setActiveFile,
   maximizeFile,
 } = fileSlice.actions;

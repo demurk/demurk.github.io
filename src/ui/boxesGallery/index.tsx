@@ -25,18 +25,21 @@ const BoxesGallery = ({
       <div className="gallery__boxes">
         {items.map((item) => {
           const isImage = typeof item !== "string";
+          const isActive = isImage
+            ? currentItem === item.bgPath
+            : currentItem === item;
           return (
             <button
               key={isImage ? item.previewPath : item}
               className={`gallery__box primary-border${
-                item === currentItem ? " active primary-border" : ""
+                isActive ? " active primary-border" : ""
               }`}
               style={!isImage ? { background: item } : {}}
               onClick={() => {
                 onBoxChange(item);
               }}
             >
-              {currentItem === item ? (
+              {isActive ? (
                 <img
                   src="svg/accept-mark.svg"
                   className="primary-svg__alt active-mark"

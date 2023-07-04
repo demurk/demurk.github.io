@@ -1,5 +1,6 @@
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { unactiveAllFiles } from "redux/reducers/files/fileSlice";
+import { getSystemTheme } from "redux/reducers/system/systemSlice";
 
 import Navbar from "components/navbar";
 import { ChildrenType } from "types/global";
@@ -7,10 +8,11 @@ import FilesContainer from "components/filesContainer";
 
 const Layout = ({ children }: ChildrenType) => {
   const dispatch = useAppDispatch();
+  const theme = useAppSelector(getSystemTheme);
 
   return (
     <div
-      className="theme__light container"
+      className={`theme__${theme} container`}
       onClick={() => dispatch(unactiveAllFiles())}
     >
       <FilesContainer />

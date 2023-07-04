@@ -8,6 +8,16 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+  // &__background {
+  //   height: inherit;
+  //   width: 100%;
+
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   z-index: -1;
+  // }
 }
 
 .desktop-grid {

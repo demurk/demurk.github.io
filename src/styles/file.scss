@@ -19,6 +19,10 @@
     height: calc(100vh - $navbar-height) !important;
   }
 
+  &.active {
+    color: #999999;
+  }
+
   &__header {
     height: $file-header-height;
     display: flex;
@@ -26,6 +30,7 @@
     justify-content: space-between;
     align-items: center;
     margin-left: 5px;
+    color: white;
   }
 
   &__buttons {
@@ -46,5 +51,11 @@
 
   &__close:hover {
     background-color: red;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: unset;
   }
 }

@@ -1,0 +1,63 @@
+{
+    "name": "Denis Mubarakshin",
+    "location_section": "Location",
+    "loc_header": "Accommodation",
+    "loc_value": "Russia, Korolev",
+    "workformat_header": "Ready to work",
+    "workformat_value": "ready for remote work",
+    "age_section": "Age and experience",
+    "experience_header": "Experience",
+    "experience_value": "3 years and 4 months",
+    "age_header": "Age",
+    "salary_header": "Salary Expectations",
+    "salary_value": "From 2 000 $",
+    "contact_section": "Contact Information",
+    "phone_header": "Mobile",
+    "skills_section": "Professional skills",
+    "work_exp_section": "Work Experience",
+    "pp_work_dur": "Aug 2022 - Jun 2023 (11 months)",
+    "pp_position": "Fullstack Web Developer",
+    "pp_project": "Development of a system to ensure the procurement and financial activities of government agencies",
+    "pp_tasks_list": [
+        "Development of new functionality",
+        "Optimization of the backend, database queries",
+        "Integration with services",
+        "Data visualization with graphs / charts"
+    ],
+    "bj_work_dur": "March 2022 - June 2022 (4 months)",
+    "bj_position": "Fullstack Web Developer",
+    "bj_project": "Development of a smart intercom administration system",
+    "bj_tasks_list": [
+        "Development of new functionality",
+        "Improving web application performance",
+        "Optimization of the backend, database"
+    ],
+    "pw_work_dur": "Nov 2021 - Feb 2022 (4 months)",
+    "pw_company_name": "Project activity",
+    "pw_position": "Frontend developer",
+    "pw_project": "Wiki-like front-end development",
+    "pw_tasks_list": [
+        "Development / optimization of functionality",
+        "Creating an adaptive layout from the Figma service",
+        "Development of a system for interacting with tab data based on the use of local / global"
+    ],
+    "fl_work_dur": "February 2020 - February 2022 (2 years and 1 month)",
+    "fl_company": "Private practice / freelancing",
+    "fl_position": "Python developer",
+    "fl_project": "Software development",
+    "fl_tasks_list": [
+        "Creating Desktop Apps",
+        "Creation of small web applications with integration of payment systems (Tinkoff, Cloud Payment)",
+        "Creating bots for Telegram / Discord",
+        "Creating parsers with aggregation / filtering / data storage",
+        "Reverse engineering API of various services"
+    ],
+    "education_section": "Higher Education",
+    "education_work_dur": "September 2018 - August 2022",
+    "education_company_name": "LEONOV University of Technology",
+    "education_position": "Organization and technology of information security",
+    "age": "{{value, age}}",
+    "exp_header_label": "Duties & achievements",
+    "exp_task_label": "Objectives",
+    "exp_skills_label": "Applicable skills"
+}

@@ -1,0 +1,66 @@
+.aboutme {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  color: black;
+
+  &__header {
+    font-size: 27px;
+    font-weight: bold;
+  }
+
+  &__content {
+    padding: 30px 50px;
+  }
+
+  &__title {
+    font-weight: bold;
+    padding: 8px 0;
+    margin: 15px 0;
+    font-size: 20px;
+    border-top: 3px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  &__pd {
+    display: flex;
+    margin: 2px 0;
+
+    p {
+      margin: 0;
+    }
+    &-header {
+    }
+
+    &-value {
+      padding-left: 8px;
+    }
+
+    &-title {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  }
+
+  &__exp {
+    > div {
+      margin: 5px 0;
+    }
+    &-title {
+      font-weight: bold;
+      margin-top: 0px !important;
+      font-size: 20px;
+    }
+    &-header {
+      font-weight: bold;
+      margin-top: 10px !important;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(75px, 150px) auto;
+    grid-column-gap: 15px;
+    grid-row-gap: 25px;
+  }
+}

@@ -1,10 +1,5 @@
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import {
-  changeLanguage,
-  getSystemLanguage,
-} from "redux/reducers/system/systemSlice";
-
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 
 import { LANG_EN, LANG_RU, LangType } from "helpers/constants";
 
@@ -27,30 +22,38 @@ const LanguageSelect = ({
   menuPlacement = "top",
   hideButtons = true,
 }: LanguageSelectType) => {
-  const language = useAppSelector(getSystemLanguage);
-  const selectedOption = options.find((x) => x.value === language);
+  const { i18n } = useTranslation();
 
-  const dispatch = useAppDispatch();
+  const language = i18n.language;
+  const selectedOption = options.find((x) => x.value === language);
 
   const handleChange = (selectedOption: OptionType | null) => {
     if (selectedOption) {
-      dispatch(changeLanguage(selectedOption.value));
+      i18n.changeLanguage(selectedOption.value);
     }
   };
 
   return (
-    <Select
-      components={
-        hideButtons && {
-          DropdownIndicator: () => null,
-          IndicatorSeparator: () => null,
+    <div className="navbar__btn">
+      <Select
+        components={
+          hideButtons && {
+            DropdownIndicator: () => null,
+            IndicatorSeparator: () => null,
+          }
         }
-      }
-      menuPlacement={menuPlacement}
-      value={selectedOption}
-      options={options}
-      onChange={(option) => handleChange(option)}
-    />
+        menuPlacement={menuPlacement}
+        value={selectedOption}
+        options={options}
+        onChange={(option) => handleChange(option)}
+        isClearable={false}
+        isSearchable={false}
+        classNames={{
+          control: (state) => (state.isFocused ? "red" : "inherit"),
+        }}
+        classNamePrefix="select"
+      />
+    </div>
   );
 };
 

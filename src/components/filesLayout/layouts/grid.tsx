@@ -120,7 +120,7 @@ const GridLayout = ({ filePreviews }: GridLayoutType) => {
     return (
       <div
         draggable={true}
-        style={{ order: position }}
+        style={{ order: position, margin: "auto" }}
         key={`f${position}`}
         onDragStart={(e) => {
           dragStartHandler(e, position);

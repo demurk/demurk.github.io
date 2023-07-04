@@ -10,20 +10,23 @@ const FileContainer = () => {
 
   return (
     <div className="files__container">
-      {visibleFiles.map(({ data, lastPosition, isActive, isMaximized }) => {
-        const { fileData, fileComponent } = FilesData[data.id];
-        return (
-          <FileWindow
-            key={data.id}
-            FD={fileData}
-            lastPosition={lastPosition}
-            isActive={isActive}
-            isMaximized={isMaximized}
-          >
-            {fileComponent}
-          </FileWindow>
-        );
-      })}
+      {visibleFiles.map(
+        ({ data, lastPosition, isActive, isMaximized, lastSize }) => {
+          const { fileData, fileComponent } = FilesData[data.id];
+          return (
+            <FileWindow
+              key={data.id}
+              FD={fileData}
+              lastPosition={lastPosition}
+              isActive={isActive}
+              isMaximized={isMaximized}
+              lastSize={lastSize}
+            >
+              {fileComponent}
+            </FileWindow>
+          );
+        }
+      )}
     </div>
   );
 };

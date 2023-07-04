@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "redux/store";
-import { FileData, CoordinatesType } from "types/global";
 import { LangType, ThemeType, LANG_EN, LANG_RU } from "helpers/constants";
 
 interface ConfigState {
@@ -22,8 +21,8 @@ const initialConfigState = (): ConfigState => {
   return {
     lang: getUserLanguage(),
     theme: "dark",
-    accent: "#0900C7",
-    background: "#0900C7",
+    accent: "#94f5aa",
+    background: "img/backgrounds/xp.jpg",
   };
 };
 

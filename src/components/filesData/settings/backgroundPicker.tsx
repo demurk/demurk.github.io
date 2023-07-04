@@ -14,7 +14,12 @@ type BackgroundType = {
 const BackgroundPicker = () => {
   const dispatch = useAppDispatch();
 
-  const backgrounds: BackgroundType[] = [];
+  const backgrounds: BackgroundType[] = [
+    {
+      bgPath: "img/backgrounds/xp.jpg",
+      previewPath: "img/backgroundPreviews/xp.jpg",
+    },
+  ];
   const currentBackground = useAppSelector(getSystemBackground);
 
   const [customBackground, setCustomBackground] =
