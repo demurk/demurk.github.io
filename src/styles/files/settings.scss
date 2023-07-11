@@ -1,24 +1,19 @@
 @use "styles/master" as *;
 
-$padding: 10px;
 $bar-height: 10px;
 
 .file__settings {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-
-  height: calc(100% - $padding * 2);
-  width: calc(100% - $padding * 2);
-
-  padding: $padding;
-  padding-top: 3px;
+  padding: 20px 30px;
+  padding-top: 10px;
 
   .picker {
     &__menu {
       display: flex;
       column-gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     &__preview {
@@ -58,18 +53,25 @@ $bar-height: 10px;
     }
   }
 
+  .text {
+    margin-bottom: 5px;
+  }
+
   .bg-settings {
     .gallery__box {
       width: 100px;
       height: 100px;
+
+      &-upload {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 98px;
+        height: 98px;
+      }
     }
     #bgFile {
       display: none;
-    }
-    .bg-upload {
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
   }
 }

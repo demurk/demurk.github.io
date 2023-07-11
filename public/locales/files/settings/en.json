@@ -1,0 +1,10 @@
+{
+    "theme_label": "Select a system theme",
+    "lang_label": "Select system language",
+    "accent_label": "Select system accent color",
+    "bg_label": "Select desktop wallpaper",
+    "dark_label": "Dark",
+    "light_label": "Light",
+    "recent_colors": "Recent colors",
+    "default_colors": "Default colors"
+}

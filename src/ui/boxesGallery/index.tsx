@@ -20,7 +20,7 @@ const BoxesGallery = ({
 }: BoxesGalleryType) => {
   return (
     <>
-      {title ? <div>{title}</div> : null}
+      {title ? <div className="text">{title}</div> : null}
 
       <div className="gallery__boxes">
         {items.map((item) => {

@@ -1,16 +1,18 @@
 import { useAppSelector } from "redux/hooks";
 import { getSystemBackground } from "redux/reducers/system/systemSlice";
 
-import FilesLayout from "components/filesLayout";
+import FilePreviewsLayout from "components/filePreviewsLayout";
 
 // Files data
-import { FDAboutMe } from "components/filesData/aboutMe";
-import { FDSettings } from "components/filesData/settings";
+import { FDAboutMe } from "entities/files/aboutMe";
+import { FDSettings } from "entities/files/settings";
+import { FDMinesweeper } from "entities/files/minesweeper";
 
 import "styles/desktop.scss";
 
 const desktopFiles = [
-  { ...FDAboutMe },
+  FDAboutMe,
+  FDMinesweeper,
   { ...FDSettings, initialPositionIndex: -1 },
 ];
 
@@ -25,7 +27,7 @@ const Desktop = () => {
           backgroundImage: `url(${currentBackgroundImage})`,
         }}
       >
-        <FilesLayout filesArray={desktopFiles} />
+        <FilePreviewsLayout filesArray={desktopFiles} />
       </div>
     </>
   );

@@ -1,0 +1,71 @@
+@use "./master" as *;
+
+.select {
+  &__control {
+    border: unset !important;
+    border-radius: 0 !important;
+    box-shadow: unset !important;
+  }
+  &__menu {
+    margin: 0 !important;
+    border: unset !important;
+    z-index: 11 !important;
+    &-list {
+      padding: 0 !important;
+    }
+  }
+  &__option {
+    padding: 8px 0 !important;
+    text-align: left;
+    text-indent: 12px;
+  }
+}
+
+.theme {
+  &__light {
+    .select {
+      &__control {
+        background-color: $light;
+      }
+      &__option {
+        color: $dark;
+        background-color: $light-main;
+        text-shadow: $light 0px 1px 7px;
+        &:hover {
+          background-color: $light-hovered;
+        }
+      }
+      &__single-value {
+        color: $dark;
+      }
+      &__bordered {
+        .select__control {
+          border: 2px solid $dark !important;
+        }
+      }
+    }
+  }
+  &__dark {
+    .select {
+      &__control {
+        background-color: inherit;
+      }
+      &__option {
+        background-color: $dark-main;
+        color: $light;
+        text-shadow: $dark 0px 1px 7px;
+        &:hover {
+          background-color: $dark-hovered;
+        }
+      }
+      &__single-value {
+        color: $light;
+      }
+      &__bordered {
+        .select__control {
+          border: 2px solid $light !important;
+        }
+      }
+    }
+  }
+}

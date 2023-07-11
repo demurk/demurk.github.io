@@ -1,0 +1,16 @@
+@use "./master" as *;
+
+.boxes-bg {
+  display: grid;
+  width: 100vw;
+  height: calc(100vh - $navbar-height);
+
+  .box {
+    margin: 2px;
+    transition: 3s ease;
+  }
+
+  .box:hover {
+    transition-duration: 0s;
+  }
+}

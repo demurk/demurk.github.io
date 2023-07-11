@@ -1,12 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 const DynamicWindowSize = () => {
   const windowSize = useRef<number[]>([window.innerWidth, window.innerHeight]);
-
-  // const [windowSize, setWindowSize] = useState<number[]>([
-  //   window.innerWidth,
-  //   window.innerHeight,
-  // ]);
 
   useEffect(() => {
     const handleWindowResize = () => {

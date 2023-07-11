@@ -7,3 +7,5 @@ export const LANG_RU = "ru";
 export const LANG_EN = "en";
 
 export type LangType = typeof LANG_RU | typeof LANG_EN;
+
+export const BG_BOXES = "boxes";

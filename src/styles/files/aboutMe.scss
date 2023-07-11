@@ -11,6 +11,10 @@
 
   &__content {
     padding: 30px 50px;
+
+    @media (max-width: 720px) {
+      padding: 20px 30px;
+    }
   }
 
   &__title {
@@ -28,8 +32,6 @@
 
     p {
       margin: 0;
-    }
-    &-header {
     }
 
     &-value {
@@ -62,5 +64,9 @@
     grid-template-columns: minmax(75px, 150px) auto;
     grid-column-gap: 15px;
     grid-row-gap: 25px;
+
+    @media (max-width: 720px) {
+      grid-template-columns: minmax(60px, 100px) auto;
+    }
   }
 }

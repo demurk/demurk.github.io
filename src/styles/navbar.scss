@@ -2,15 +2,28 @@
 
 .navbar {
   width: 100%;
-  height: $navbar-height;
+  min-height: $navbar-height;
   display: flex;
   column-gap: 1px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  z-index: 30;
 
   &__start {
-    width: 51px;
+    min-width: 51px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      img {
+        filter: invert(14%) sepia(100%) saturate(4054%) hue-rotate(4deg)
+          brightness(91%) contrast(88%);
+      }
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   &__minimize {
@@ -19,21 +32,44 @@
     height: 100%;
   }
 
+  &__files {
+    min-width: 45px;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 2px;
+
+    overflow-y: hidden;
+    overflow-x: auto;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   &__file {
-    width: 160px;
-    max-width: 20%;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-size: 13px;
+    letter-spacing: 0.25px;
 
     &-info {
       height: 100%;
       align-items: center;
       display: flex;
-      column-gap: 10px;
-      // padding: 5px;
+      // column-gap: 7px;
       padding-bottom: 0;
+    }
+
+    &-name {
+      overflow: hidden;
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &-shadow {
@@ -48,9 +84,24 @@
       width: 100%;
     }
 
+    &-icon {
+      min-width: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     img {
-      margin-left: 10px;
       height: $navbar-height - 15px;
+    }
+  }
+
+  &__lng {
+    min-width: 45px;
+    text-align: center;
+
+    .select__value-container {
+      padding: 0 !important;
     }
   }
 
@@ -60,7 +111,12 @@
     align-items: center;
     padding: 0 5px;
     height: 100%;
-    justify-content: center;
+    justify-content: space-evenly;
+    font-size: 12px;
+
+    @media (max-width: 350px) {
+      display: none;
+    }
   }
 
   &__widgets {
@@ -68,10 +124,16 @@
     display: flex;
     margin-right: 0;
     margin-left: auto;
+    font-size: 14px;
   }
 
   &__btn {
     height: 100%;
+  }
+
+  .select__option {
+    text-align: center;
+    text-indent: unset;
   }
 }
 
@@ -89,9 +151,6 @@
         &.active:hover {
           background-color: $light-active-hovered;
         }
-      }
-      &__start:not(:hover) {
-        color: $dark !important;
       }
     }
   }
@@ -111,9 +170,6 @@
       }
       .navbar__minimize {
         border-color: #707070 !important;
-      }
-      &__start:not(:hover) {
-        color: $light !important;
       }
     }
   }

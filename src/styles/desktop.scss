@@ -1,7 +1,9 @@
 @use "./master" as *;
 
 .desktop {
-  height: calc(100% - $navbar-height - 20px);
+  // height: calc(100vh - $navbar-height - 20px);
+  // height: calc(100dvh - $navbar-height - 20px);
+  height: 100%;
   padding: 10px;
   background: no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -9,15 +11,9 @@
   -o-background-size: cover;
   background-size: cover;
 
-  // &__background {
-  //   height: inherit;
-  //   width: 100%;
-
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   z-index: -1;
-  // }
+  @media (max-width: 720px) {
+    padding: 4px;
+  }
 }
 
 .desktop-grid {

@@ -19,7 +19,7 @@ import {
 } from "redux/reducers/files/fileSlice";
 
 // import DraggableComponent from "helpers/draggable";
-import DraggableComponent from "helpers/draggablev2";
+import DraggableComponent from "helpers/draggable";
 
 import "styles/file.scss";
 
@@ -109,7 +109,8 @@ const FileWindow = ({
           width: lastSize.x - 2,
           height: lastSize.y - 2,
         }}
-        onClick={(e) => onFileClick(e)}
+        // onClick={(e) => onFileClick(e)}
+        onMouseDown={(e) => onFileClick(e)}
       >
         <div
           className="file__header"
@@ -126,7 +127,7 @@ const FileWindow = ({
                 dispatch(minimizeFile(FD.id));
               }}
             >
-              _
+              <img src="svg/minimize_window.svg" alt="" />
             </button>
             <button
               className="file__button"
@@ -134,7 +135,15 @@ const FileWindow = ({
                 dispatch(maximizeFile(FD.id));
               }}
             >
-              O
+              <img
+                src={
+                  isMaximized
+                    ? "svg/normal_window.svg"
+                    : "svg/maximize_window.svg"
+                }
+                alt=""
+                style={isMaximized ? { rotate: "180deg" } : {}}
+              />
             </button>
             <button
               className="file__button file__close"
@@ -142,7 +151,11 @@ const FileWindow = ({
                 dispatch(closeFile(FD.id));
               }}
             >
-              X
+              <img
+                src="svg/close_window.svg"
+                alt=""
+                style={{ width: "20px", height: "20px" }}
+              />
             </button>
           </div>
         </div>

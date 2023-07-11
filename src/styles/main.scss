@@ -1,23 +1,28 @@
 @use "./master" as *;
 
-body {
-  margin: 0;
-  overflow: hidden;
+@font-face {
+  font-family: "Segoe UI";
+  src: url("../../public/fonts/SegoeUI.ttf") format("truetype");
 }
 
-#root {
-  width: 100vw;
-  height: 100vh;
+body {
+  margin: 0;
+  // overflow: hidden;
+  font-family: "Segoe UI";
 }
 
 .container {
-  width: inherit;
-  height: inherit;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .files__container {
   position: absolute;
-  z-index: 100;
+  z-index: 20;
 }
 
 .theme {
@@ -59,68 +64,6 @@ body {
     }
     .unactive-bg {
       background-color: $dark-active !important;
-    }
-  }
-}
-
-.select {
-  &__control {
-    border: unset !important;
-    box-shadow: unset !important;
-  }
-  &__menu {
-    margin: 0 !important;
-    border: unset !important;
-    z-index: 11 !important;
-    &-list {
-      padding: 0 !important;
-    }
-  }
-  &__option {
-    padding: 8px 0 !important;
-    text-align: center;
-  }
-}
-
-.theme {
-  &__light {
-    .select {
-      &__control {
-        background-color: $light;
-      }
-      &__menu {
-        background-color: inherit;
-      }
-      &__option {
-        color: $dark;
-        background-color: $light;
-        &:hover {
-          background-color: $light-hovered;
-        }
-      }
-      &__single-value {
-        color: $dark;
-      }
-    }
-  }
-  &__dark {
-    .select {
-      &__control {
-        background-color: inherit;
-      }
-      &__menu {
-        background-color: inherit;
-      }
-      &__option {
-        background-color: $dark;
-        color: $light;
-        &:hover {
-          background-color: $dark-hovered;
-        }
-      }
-      &__single-value {
-        color: $light;
-      }
     }
   }
 }

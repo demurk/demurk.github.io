@@ -1,25 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "redux/store";
-import { LangType, ThemeType, LANG_EN, LANG_RU } from "helpers/constants";
+import { ThemeType } from "helpers/constants";
 
 interface ConfigState {
-  lang: LangType;
   theme: ThemeType;
   accent: string;
   background: string;
 }
 
-const getUserLanguage = () => {
-  const langFull = navigator.language;
-  const langShort = langFull.slice(0, 2);
-
-  return LANG_RU === langShort ? LANG_RU : LANG_EN;
-};
-
 const initialConfigState = (): ConfigState => {
   return {
-    lang: getUserLanguage(),
     theme: "dark",
     accent: "#94f5aa",
     background: "img/backgrounds/xp.jpg",
@@ -32,9 +23,6 @@ export const systemSlice = createSlice({
   name: "system",
   initialState,
   reducers: {
-    changeLanguage: (state, action: PayloadAction<LangType>) => {
-      state.lang = action.payload;
-    },
     changeTheme: (state, action: PayloadAction<ThemeType>) => {
       state.theme = action.payload;
     },
@@ -47,12 +35,8 @@ export const systemSlice = createSlice({
   },
 });
 
-export const { changeLanguage, changeTheme, changeAccent, changeBackground } =
+export const { changeTheme, changeAccent, changeBackground } =
   systemSlice.actions;
-
-export const getSystemLanguage = (state: RootState): LangType => {
-  return state.system.lang;
-};
 
 export const getSystemTheme = (state: RootState): ThemeType => {
   return state.system.theme;

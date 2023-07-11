@@ -1,9 +1,10 @@
+import { isMobile } from "react-device-detect";
+
 import { useAppSelector } from "redux/hooks";
 import { getVisibleFiles } from "redux/reducers/files/fileSlice";
 import FileWindow from "components/fileWindow";
 
-//Files
-import FilesData from "components/filesData";
+import FilesData from "entities/files";
 
 const FileContainer = () => {
   const visibleFiles = useAppSelector(getVisibleFiles);
@@ -19,7 +20,7 @@ const FileContainer = () => {
               FD={fileData}
               lastPosition={lastPosition}
               isActive={isActive}
-              isMaximized={isMaximized}
+              isMaximized={isMobile ? true : isMaximized}
               lastSize={lastSize}
             >
               {fileComponent}
