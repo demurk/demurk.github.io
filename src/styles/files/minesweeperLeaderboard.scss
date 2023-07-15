@@ -1,0 +1,105 @@
+.leaderboard {
+  min-height: 100%;
+  width: 600px;
+  max-width: 100%;
+  margin: auto;
+
+  &__content {
+    height: 100%;
+    width: 100%;
+    padding: 30px;
+    background: white;
+    color: black;
+  }
+
+  &__entries {
+    width: 100%;
+
+    td {
+      padding: 5px 0;
+    }
+
+    &-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__entry {
+    text-align: center;
+
+    &-skeleton {
+      height: 337px;
+      td {
+        border-radius: 10px;
+        padding: 0;
+        background-color: #e2e5e7;
+        background-image: linear-gradient(
+          90deg,
+          rgba(#fff, 0),
+          rgba(#fff, 0.5),
+          rgba(#fff, 0)
+        );
+        background-size: 40px 100%;
+        background-repeat: no-repeat;
+        background-position: left -40px top 0;
+        animation: shine 2.5s ease infinite;
+      }
+
+      @keyframes shine {
+        to {
+          background-position: right -40px top 0;
+        }
+      }
+    }
+
+    &.is-user {
+      border: 3px solid #2bde1c;
+    }
+
+    .number {
+      font-family: "Seven Segment";
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    &-name {
+      text-transform: capitalize;
+    }
+
+    &-position {
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        height: 28px;
+        vertical-align: middle;
+      }
+
+      &.gold img {
+        filter: invert(96%) sepia(9%) saturate(4893%) hue-rotate(334deg)
+          brightness(92%) contrast(78%);
+      }
+      &.silver img {
+        filter: invert(79%) sepia(0%) saturate(0%) hue-rotate(327deg)
+          brightness(95%) contrast(98%);
+      }
+      &.bronze img {
+        filter: invert(47%) sepia(75%) saturate(440%) hue-rotate(349deg)
+          brightness(99%) contrast(90%);
+      }
+    }
+  }
+
+  &__update {
+    margin-top: 20px;
+    width: 100%;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 20px;
+  }
+}

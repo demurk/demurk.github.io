@@ -28,6 +28,7 @@ interface FileWindowType extends ChildrenType {
   lastPosition: CoordinatesType;
   isActive: boolean;
   isMaximized: boolean;
+  isMinimized: boolean;
   lastSize: CoordinatesType;
 }
 
@@ -40,6 +41,7 @@ const FileWindow = ({
   lastPosition,
   isActive,
   isMaximized,
+  isMinimized,
   lastSize,
 }: FileWindowType) => {
   const draggableAreaRef = useRef<HTMLInputElement>(null);
@@ -83,6 +85,7 @@ const FileWindow = ({
         dispatch(saveFileSize({ fileId: FD.id, ...fileWindowSize.current }));
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -103,13 +106,16 @@ const FileWindow = ({
         className={`file${isMaximized ? " maximized" : ""}${
           isActive ? " active" : " unactive-bg"
         }`}
-        style={{
-          backgroundColor: systemAccent,
-          borderColor: systemAccent,
-          width: lastSize.x - 2,
-          height: lastSize.y - 2,
-        }}
-        // onClick={(e) => onFileClick(e)}
+        style={
+          isMinimized
+            ? { display: "none" }
+            : {
+                backgroundColor: systemAccent,
+                borderColor: systemAccent,
+                width: lastSize.x - 2,
+                height: lastSize.y - 2,
+              }
+        }
         onMouseDown={(e) => onFileClick(e)}
       >
         <div
@@ -122,15 +128,20 @@ const FileWindow = ({
           <div className="file__name">{FD.name}</div>
           <div className="file__buttons" onClick={(e) => e.stopPropagation()}>
             <button
-              className="file__button"
+              className="file__button flex-center"
               onClick={(e) => {
                 dispatch(minimizeFile(FD.id));
+                if (fileWindowSize.current) {
+                  dispatch(
+                    saveFileSize({ fileId: FD.id, ...fileWindowSize.current })
+                  );
+                }
               }}
             >
               <img src="svg/minimize_window.svg" alt="" />
             </button>
             <button
-              className="file__button"
+              className="file__button flex-center"
               onClick={(e) => {
                 dispatch(maximizeFile(FD.id));
               }}
@@ -146,7 +157,7 @@ const FileWindow = ({
               />
             </button>
             <button
-              className="file__button file__close"
+              className="file__button file__close  flex-center"
               onClick={(e) => {
                 dispatch(closeFile(FD.id));
               }}

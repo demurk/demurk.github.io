@@ -53,9 +53,6 @@
   &__button {
     height: $file-header-height;
     width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     img {
       height: $file-header-height - 15;

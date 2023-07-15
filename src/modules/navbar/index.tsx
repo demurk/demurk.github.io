@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from "redux/hooks";
 import FileNavbar from "components/fileNavbar";
 import ClockDateWidget from "components/clockDateWidget";
 import LanguageSelect from "ui/languageSelect";
+import TelegramButton from "components/telegramButton";
 
 import "styles/navbar.scss";
 
@@ -26,7 +27,7 @@ const Navbar = () => {
   return (
     <div className="navbar primary-bg" onMouseDown={(e) => e.stopPropagation()}>
       <button
-        className="navbar__start navbar__btn"
+        className="navbar__start navbar__btn flex-center"
         style={{ color: accent }}
         onClick={onTurnOffClick}
       >
@@ -40,16 +41,21 @@ const Navbar = () => {
           }, minmax(35px, 160px))`,
         }}
       >
-        {Object.values(openedFiles).map(({ data }) => {
-          return (
-            <FileNavbar
-              key={data.id}
-              FD={{ ...data, isActive: data.id === activeFileId }}
-            />
-          );
-        })}
+        {Object.values(openedFiles)
+          .sort((a, b) => (a.openedTimestamp > b.openedTimestamp ? 1 : -1))
+          .map(({ data }) => {
+            return (
+              <FileNavbar
+                key={data.id}
+                FD={{ ...data, isActive: data.id === activeFileId }}
+              />
+            );
+          })}
       </div>
       <div className="navbar__widgets">
+        <div className="navbar__btn navbar__tg no-select">
+          <TelegramButton />
+        </div>
         <div className="navbar__btn navbar__lng no-select">
           <LanguageSelect />
         </div>

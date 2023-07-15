@@ -1,22 +1,147 @@
+$cell-size: 32px;
+
+$cell-border-dark: #808080;
+$cell-border-light: #ffffff;
+
+$default-color: #c0c0c0;
+
 .minesweeper {
   &__game {
+    font-family: "Seven Segment", "Fourteen Segment";
+    width: 100%;
+    height: 100%;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
     &-container {
       display: "flex";
-      height: "500px";
+    }
+    &-board {
+      border: 8px solid;
+      margin: 20px 0;
     }
     &-row {
       display: flex;
     }
     &-cell {
-      width: 40px;
-      height: 40px;
+      width: $cell-size;
+      height: $cell-size;
 
-      border: 1px solid black;
+      font-weight: bold;
+      font-size: $cell-size - 8px;
+
+      border: 4px solid;
+
       cursor: pointer;
-      text-align: center;
+      box-sizing: border-box;
 
       background-color: white;
       color: black;
+
+      &.exploded {
+        background-color: red;
+      }
+
+      &.revealed {
+        border: 1px solid;
+        border-color: $cell-border-dark;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    &-bombs {
+      border: 4px solid;
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+      padding: 6px 0;
     }
   }
+
+  &__content {
+    width: max-content;
+    margin: auto;
+    border: 5px solid;
+    padding: 10px;
+    background-color: $default-color;
+  }
+
+  &__header {
+    border: 5px solid;
+    display: flex;
+    font-size: 26px;
+    flex-direction: row;
+    padding: 6px;
+    justify-content: space-between;
+    align-items: center;
+
+    &-value {
+      display: flex;
+      flex-direction: row;
+
+      div {
+        padding: 0 3px;
+        min-width: 33px;
+        text-align: center;
+      }
+
+      .btn-dif {
+        min-width: 30px;
+        text-align: center;
+      }
+
+      .btn-dif:disabled {
+        color: #b6b6b6;
+        cursor: default;
+      }
+    }
+
+    &-label {
+      line-height: 100%;
+      &.scaled-sm {
+        font-size: 22px;
+        max-width: min-content;
+      }
+    }
+  }
+
+  &__footer {
+    border: 8px solid;
+    display: flex;
+    font-size: 24px;
+    flex-direction: column;
+
+    &-btn {
+      border: 4px solid;
+      background-color: white;
+      color: $cell-border-dark;
+      padding: 0 0 2px 0;
+      &.pressed {
+        padding: 2px 0 0 0;
+      }
+    }
+  }
+}
+
+.scaled-sm {
+  transform: scale(0.9, 1);
+  font-size: 21px;
+}
+
+.volume-border {
+  border-left-color: $cell-border-light;
+  border-top-color: $cell-border-light;
+  border-right-color: $cell-border-dark;
+  border-bottom-color: $cell-border-dark;
+}
+.volume-border-inv {
+  border-left-color: $cell-border-dark;
+  border-top-color: $cell-border-dark;
+  border-right-color: $cell-border-light;
+  border-bottom-color: $cell-border-light;
 }

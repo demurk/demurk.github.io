@@ -1,0 +1,31 @@
+.ms-guide {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  color: black;
+
+  &__header {
+    font-size: 27px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__content {
+    padding: 30px 50px;
+
+    @media (max-width: 720px) {
+      padding: 20px 30px;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+    padding: 8px 0;
+    margin: 10px 0;
+    font-size: 20px;
+  }
+
+  img {
+    margin-bottom: 15px;
+  }
+}

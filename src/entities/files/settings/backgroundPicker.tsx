@@ -56,12 +56,15 @@ const BackgroundPicker = () => {
           accept="image/*"
           id="bgFile"
           onChange={(event) => {
-            if (event.target.files) {
+            if (event.target.files?.length) {
               onSetCustomBackground(URL.createObjectURL(event.target.files[0]));
             }
           }}
         />
-        <label htmlFor="bgFile" className="gallery__box gallery__box-upload">
+        <label
+          htmlFor="bgFile"
+          className="gallery__box gallery__box-upload flex-center"
+        >
           +
         </label>
       </BoxesGallery>

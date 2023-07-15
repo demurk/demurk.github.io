@@ -28,7 +28,9 @@ const FilePreview = ({
   return (
     <div
       onClick={(e) => onPreviewClick(e)}
-      className={`file__preview no-select ${isFocused ? "focused" : ""}`}
+      className={`file__preview flex-center no-select ${
+        isFocused ? "focused" : ""
+      }`}
     >
       <img
         src={`img/${FD.icon}`}

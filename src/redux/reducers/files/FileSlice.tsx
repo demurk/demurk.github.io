@@ -8,6 +8,7 @@ interface FileState {
   isMaximized: boolean;
   lastPosition: CoordinatesType;
   lastSize: CoordinatesType;
+  openedTimestamp: number;
 
   data: FileData;
 }
@@ -20,9 +21,10 @@ const initialFileState = (FD: FileData): FileState => {
   return {
     isMinimized: false,
     isMaximized: false,
-    lastPosition: { x: 100, y: 40 },
-    lastSize: { x: 400, y: 400 },
+    lastPosition: { x: 60 + FD.id * 30, y: 40 + FD.id * 15 },
+    lastSize: { x: 600, y: 500 },
     data: FD,
+    openedTimestamp: Math.floor(Date.now() / 1000),
   };
 };
 
@@ -145,11 +147,18 @@ export const getActiveFileId = (state: RootState): number | null => {
 export const getVisibleFiles = (
   state: RootState
 ): Array<FileStateWithActive> => {
-  const openedFilesData = Object.values(state.openedFiles.data).filter(
-    (fileState) => fileState.isMinimized === false
-  );
+  // Cant mimimize files like this, cus there are losing their state
 
-  return openedFilesData.map((fileData) => ({
+  // const openedFilesData = Object.values(state.openedFiles.data).filter(
+  //   (fileState) => fileState.isMinimized === false
+  // );
+
+  // return openedFilesData.map((fileData) => ({
+  //   ...fileData,
+  //   isActive: fileData.data.id === state.openedFiles.activeFileId,
+  // }));
+
+  return Object.values(state.openedFiles.data).map((fileData) => ({
     ...fileData,
     isActive: fileData.data.id === state.openedFiles.activeFileId,
   }));

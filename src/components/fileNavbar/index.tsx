@@ -13,10 +13,12 @@ const FileNavbar = ({ FD }: { FD: FileDataWithActive }): JSX.Element => {
         e.stopPropagation();
         dispatch(displayOrMinimzeFile(FD.id));
       }}
-      className={`navbar__file navbar__btn ${FD.isActive ? " active" : ""}`}
+      className={`navbar__file navbar__btn ${
+        FD.isActive ? " active" : ""
+      } no-select`}
     >
       <div className="navbar__file-info">
-        <div className="navbar__file-icon">
+        <div className="navbar__file-icon flex-center">
           <img src={`img/${FD.icon}`} alt="" draggable={false} />
         </div>
         <div className="navbar__file-name no-select">{FD.name}</div>

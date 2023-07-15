@@ -12,7 +12,14 @@ const FileContainer = () => {
   return (
     <div className="files__container">
       {visibleFiles.map(
-        ({ data, lastPosition, isActive, isMaximized, lastSize }) => {
+        ({
+          data,
+          lastPosition,
+          isActive,
+          isMaximized,
+          lastSize,
+          isMinimized,
+        }) => {
           const { fileData, fileComponent } = FilesData[data.id];
           return (
             <FileWindow
@@ -22,6 +29,7 @@ const FileContainer = () => {
               isActive={isActive}
               isMaximized={isMobile ? true : isMaximized}
               lastSize={lastSize}
+              isMinimized={isMinimized}
             >
               {fileComponent}
             </FileWindow>

@@ -4,7 +4,7 @@ import Minesweeper from "./game";
 
 export const FDMinesweeper: FileData = {
   id: 3,
-  icon: "txt_icon.png",
+  icon: "minesweeper_icon.webp",
   name: "Minesweeper.exe",
 };
 

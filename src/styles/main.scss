@@ -5,9 +5,19 @@
   src: url("../../public/fonts/SegoeUI.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Seven Segment";
+  src: url("../../public/fonts/SevenSegment.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Fourteen Segment";
+  src: url("../../public/fonts/LCD14.otf") format("truetype");
+}
+
 body {
   margin: 0;
-  // overflow: hidden;
+  overflow: hidden;
   font-family: "Segoe UI";
 }
 
@@ -44,6 +54,13 @@ body {
     }
     .unactive-bg {
       background-color: $light-main !important;
+      .file__header {
+        color: $dark-active;
+
+        img {
+          filter: $filter-dark;
+        }
+      }
     }
   }
   &__dark {
@@ -91,4 +108,10 @@ input[type="reset"] {
 [draggable="true"] {
   position: relative;
   z-index: 1;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

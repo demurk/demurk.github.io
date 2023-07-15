@@ -4,12 +4,9 @@
   grid-auto-rows: min-content;
 
   .file__preview {
-    display: flex;
     flex-direction: column;
     width: 100px;
     height: 100px;
-    align-items: center;
-    justify-content: center;
     color: white;
     text-shadow: black 0px 1px 4px;
     font-size: 14px;
@@ -30,6 +27,13 @@
       &:hover {
         background-color: rgba(60, 127, 190, 0.452);
       }
+    }
+
+    &-name {
+      word-break: break-all;
+      text-align: center;
+      margin: 0 5px;
+      height: 38px;
     }
 
     &-icon {

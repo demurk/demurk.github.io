@@ -1,0 +1,22 @@
+{
+    "title": "How to Play Minesweeper",
+    "object_title": "What is the Object of Minesweeper?",
+    "object_value": "In this classic game you are presented with a board of squares. Some squares contain mines, others don't. If you click on a square containing a mine, you lose. If you manage to open up all the squares without clicking on a mine, you win.",
+    "htp_title": "How do you play Minesweeper? What do the numbers mean?",
+    "htp_value": "Clicking a square which doesn't have a mine reveals the number of neighbouring squares containing mines. By a process of deduction, and occasionally guesswork, this information can be used to work out where all the mines are.",
+    "example_title": "Minesweeper Example",
+    "example_value": "For example, looking at the image above, you can see that there is clearly a mine in the middle, surrounded by \"1\"s. Each 1 means there is one mine touching that particular square. By the same idea, you can see that the number \"2\" tells you there are two mines touching that particular square, so there is clearly a mine in the bottom right square as well. This is the basics of the game.",
+    "rules_title": "What are the rules of Minesweeper?",
+    "rules_value": [
+        "A square's \"neighbors\" are the squares above, below, left, right, and all 4 diagonals. Squares on the sides of the board or in a corner have fewer neighbors. The board does not wrap around the edges.",
+        "The first square you open and its neighbours are never a mine",
+        "If you open a square with no neighboring mines, all its neighbors will automatically open. This can cause a large area to open up quickly.",
+        "If you mark a mine incorrectly, you will have to correct the mistake before you can win. Incorrect mine marking doesn't kill you, but it can lead to mistakes which do.",
+        "You don't have to mark all the mines to win, you just need to open all non-mine squares!",
+        "Click the restart to start a new game."
+    ],
+    "status_title": "Status Information:",
+    "status_value": "The upper number contains the number of mines left to find. The number will update as you mark squares.",
+    "interaction_mobile": "To place a marker to a square, press and hold it. Hold it again to place question mark. Hold it once more to remove marker.",
+    "interaction_pc": "To place a marker to a square, right-click it. Right-click it again to place question mark. Right-click it once more to remove marker."
+}
