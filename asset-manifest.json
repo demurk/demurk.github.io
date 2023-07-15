@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9c2bdbad.css",
+    "main.js": "/static/js/main.17017167.js",
+    "static/media/SegoeUI.ttf": "/static/media/SegoeUI.b127acafb23e1c48733e.ttf",
+    "static/media/LCD14.otf": "/static/media/LCD14.9234be453b055a7cf3ba.otf",
+    "static/media/SevenSegment.ttf": "/static/media/SevenSegment.3ee4f8118d9db6b61456.ttf",
+    "index.html": "/index.html",
+    "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "main.9c2bdbad.css.map": "/static/css/main.9c2bdbad.css.map",
+    "main.17017167.js.map": "/static/js/main.17017167.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9c2bdbad.css",
+    "static/js/main.17017167.js"
+  ]
+}
