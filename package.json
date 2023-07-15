@@ -1,5 +1,6 @@
 {
-  "name": "my-app",
+  "name": "demurk-cv",
+  "homepage": "https://demurk.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,8 +37,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "host": "react-scripts --host=0.0.0.0 start"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +60,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",
-    "@types/lodash.throttle": "^4.1.7"
+    "@types/lodash.throttle": "^4.1.7",
+    "gh-pages": "^5.0.0"
   }
 }
