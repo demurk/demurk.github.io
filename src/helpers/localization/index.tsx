@@ -12,7 +12,7 @@ i18next
   .init({
     supportedLngs: [LANG_EN, LANG_RU],
     fallbackLng: LANG_EN,
-    debug: true,
+    debug: false,
     detection: {
       order: ["sessionStorage", "navigator"],
       caches: ["sessionStorage"],

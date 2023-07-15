@@ -1,5 +1,13 @@
 $navbar-height: 40px;
-$file-header-height: 30px;
+:root {
+  --file-header-height: 30px;
+}
+
+@media (max-width: 420px) {
+  :root {
+    --file-header-height: 40px;
+  }
+}
 
 // COLORS
 $dark: #101010;

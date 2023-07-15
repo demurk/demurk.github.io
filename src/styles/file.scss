@@ -36,7 +36,7 @@
   }
 
   &__header {
-    height: $file-header-height;
+    height: var(--file-header-height);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -51,12 +51,12 @@
   }
 
   &__button {
-    height: $file-header-height;
+    height: var(--file-header-height);
     width: 40px;
 
     img {
-      height: $file-header-height - 15;
-      width: $file-header-height - 15;
+      height: 15px;
+      width: 15px;
       filter: $filter-light;
     }
 
